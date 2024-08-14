@@ -17,14 +17,12 @@ public class PaymentService {
 
     public Payment createPayment(Payment payment) {
         RestTemplate restTemplate = new RestTemplate();
-        // Замена "YOUR_SHOP_ID" и "YOUR_SECRET_KEY" на ваши данные
-        String shopId = "439925";
-        String secretKey = "test_yFKZnWCR8VIo_DUOZhM0748O4mrCP4ftFPNqcS4vTZ8";
+        String shopId = System.getenv("SHOP_ID");
+        String secretKey = System.getenv("SECRET_KEY");
         String IdempotenceKey = "keykeykock";
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-        // Формирование Basic Auth
         String auth = shopId + ":" + secretKey;
         byte[] encodedAuth = Base64Utils.encode(auth.getBytes(StandardCharsets.UTF_8));
         String authHeader = "Basic " + new String(encodedAuth);
