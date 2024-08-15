@@ -1,4 +1,4 @@
-package ru.vortex.physics.model;
+package ru.vortex.physics.model.payment;
 
 public class Recipient {
     private String account_id;

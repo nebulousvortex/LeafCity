@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.client.RestTemplate;
-import ru.vortex.physics.model.Payment;
+import ru.vortex.physics.model.payment.Payment;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -19,7 +19,8 @@ public class PaymentService {
         RestTemplate restTemplate = new RestTemplate();
         String shopId = System.getenv("SHOP_ID");
         String secretKey = System.getenv("SECRET_KEY");
-        String IdempotenceKey = getRandomString();
+        //String IdempotenceKey = getRandomString();
+        String IdempotenceKey = "LOCAL";
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);

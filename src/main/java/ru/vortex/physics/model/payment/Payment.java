@@ -1,4 +1,4 @@
-package ru.vortex.physics.model;
+package ru.vortex.physics.model.payment;
 
 public class Payment {
 
@@ -13,7 +13,7 @@ public class Payment {
     private boolean refundable;
     private boolean capture;
     private PaymentMethodData payment_method_data;
-    private  Confirmation confirmation;
+    private Confirmation confirmation;
 
     public Payment(String id, String status, Amount amount, String description, Recipient recipient, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, PaymentMethodData payment_method_data, Confirmation confirmation) {
         this.id = id;
@@ -127,4 +127,5 @@ public class Payment {
     public void setRefundable(boolean refundable) {
         this.refundable = refundable;
     }
+
 }

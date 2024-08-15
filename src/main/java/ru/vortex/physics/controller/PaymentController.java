@@ -3,16 +3,16 @@ package ru.vortex.physics.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vortex.physics.model.Amount;
-import ru.vortex.physics.model.Confirmation;
-import ru.vortex.physics.model.Payment;
+import ru.vortex.physics.model.payment.Amount;
+import ru.vortex.physics.model.payment.Confirmation;
+import ru.vortex.physics.model.payment.Payment;
 import ru.vortex.physics.service.PaymentService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController()
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/payment/")
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
