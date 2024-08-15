@@ -16,9 +16,10 @@ public class Confirmation {
         this.return_url = return_url;
     }
 
-    public Confirmation(String type, String confirmation_url) {
+    public Confirmation(String type, String confirmation_url, String return_url) {
         this.type = type;
         this.confirmation_url = confirmation_url;
+        this.return_url = return_url;
     }
 
     public Confirmation() {

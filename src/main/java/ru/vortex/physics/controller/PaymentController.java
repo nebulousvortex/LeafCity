@@ -37,7 +37,7 @@ public class PaymentController {
         newPay.setAmount(new Amount("1", "RUB"));
         newPay.setDescription("Тестовое описание для redirect");
         newPay.setCapture(true);
-        newPay.setConfirmation(new Confirmation("redirect", "https://leafcity.ru/shop"));
+        newPay.setConfirmation(new Confirmation("redirect", "https://leafcity.ru/shop", "https://leafcity.ru/"));
 
         newPay = paymentService.createPayment(newPay);
         return newPay;
