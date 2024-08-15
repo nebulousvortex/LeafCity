@@ -17,6 +17,10 @@ public class ShopService {
         return productRepository.findAll();
     }
 
+    public Product getProductById(Long id){
+        return productRepository.findById(id).orElseThrow();
+    }
+
     public void saveProducts(){
         ArrayList<Product> products = new ArrayList<Product>();
         products.add(new Product("Подписька",1L, 145, "Блин, купи пж пж", 0));

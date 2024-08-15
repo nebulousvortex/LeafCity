@@ -21,6 +21,12 @@ public class ShopController {
         return shopService.getProducts();
     }
 
+    @GetMapping("/getProduct")
+    @ResponseBody
+    public Product getProduct(@RequestParam  Long id) {
+        return shopService.getProductById(id);
+    }
+
     @PostMapping("/createProducts")
     @ResponseBody
     public void createProducts() {
