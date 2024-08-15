@@ -17,12 +17,12 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @PostMapping("/getPayment")
+    @PostMapping("/getEmbeddedPayment")
     @ResponseBody
-    public Payment createPayment() {
+    public Payment createEmbeddedPayment() {
         Payment newPay = new Payment();
         newPay.setAmount(new Amount("1", "RUB"));
-        newPay.setDescription("Тестовое описание");
+        newPay.setDescription("Тестовое описание для embedded");
         newPay.setCapture(true);
         newPay.setConfirmation(new Confirmation("embedded"));
 
@@ -30,12 +30,24 @@ public class PaymentController {
         return newPay;
     }
 
-    @PostMapping("/getToken")
+    @PostMapping("/getRedirectPayment")
+    @ResponseBody
+    public Payment createPaymentRedirect() {
+        Payment newPay = new Payment();
+        newPay.setAmount(new Amount("1", "RUB"));
+        newPay.setDescription("Тестовое описание для redirect");
+        newPay.setCapture(true);
+        newPay.setConfirmation(new Confirmation("redirect", "https://leafcity.ru/shop"));
+
+        newPay = paymentService.createPayment(newPay);
+        return newPay;
+    }
+
+    @PostMapping("/getConfirmationToken")
     @ResponseBody
     public ResponseEntity<Map<String, String>> getConfirmationToken() {
         Payment newPay = new Payment();
         newPay.setAmount(new Amount("1", "RUB"));
-        newPay.setDescription("Тестовое описание");
         newPay.setCapture(true);
         newPay.setConfirmation(new Confirmation("embedded"));
 
