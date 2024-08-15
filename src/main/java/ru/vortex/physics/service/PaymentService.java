@@ -19,8 +19,8 @@ public class PaymentService {
         RestTemplate restTemplate = new RestTemplate();
         String shopId = System.getenv("SHOP_ID");
         String secretKey = System.getenv("SECRET_KEY");
-        //String IdempotenceKey = getRandomString();
-        String IdempotenceKey = "LOCAL";
+        String IdempotenceKey = getRandomString();
+        //String IdempotenceKey = "LOCAL";
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
