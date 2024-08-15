@@ -2,12 +2,14 @@ package ru.vortex.physics.model.shop;
 
 public class Product {
     private String name;
+    private int id;
     private float price;
     private String description;
     private float sale;
 
-    public Product(String name, float price, String description, float sale) {
+    public Product(String name, int id, float price, String description, float sale) {
         this.name = name;
+        this.id = id;
         this.price = price;
         this.description = description;
         this.sale = sale;
@@ -18,6 +20,14 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
