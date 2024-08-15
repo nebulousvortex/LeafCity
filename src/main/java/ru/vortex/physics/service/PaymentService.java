@@ -1,6 +1,5 @@
 package ru.vortex.physics.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,8 +30,6 @@ public class PaymentService {
 
         HttpEntity<Payment> request = new HttpEntity<>(payment, headers);
 
-        Payment response = restTemplate.postForObject("https://api.yookassa.ru/v3/payments", request, Payment.class);
-
-        return response;
+        return restTemplate.postForObject("https://api.yookassa.ru/v3/payments", request, Payment.class);
     }
 }
