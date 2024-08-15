@@ -7,6 +7,7 @@ import ru.vortex.physics.service.PaymentService;
 import ru.vortex.physics.service.ShopService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController()
 @RequestMapping("/api/v1/shop")
@@ -16,7 +17,13 @@ public class ShopController {
 
     @GetMapping("/getProducts")
     @ResponseBody
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return shopService.getProducts();
+    }
+
+    @PostMapping("/createProducts")
+    @ResponseBody
+    public void createProducts() {
+        shopService.saveProducts();
     }
 }

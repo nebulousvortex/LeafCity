@@ -13,11 +13,11 @@ public class ShopService {
     @Autowired
     ProductRepository productRepository;
 
-    public List<Product> findAllDoctors() {
+    public List<Product> getProducts() {
         return productRepository.findAll();
     }
 
-    public ArrayList<Product> getProducts(){
+    public void saveProducts(){
         ArrayList<Product> products = new ArrayList<Product>();
         products.add(new Product("Подписька",1L, 145, "Блин, купи пж пж", 0));
         products.add(new Product("Эффекты",2L, 95, "Вжух!", 0));
@@ -30,7 +30,9 @@ public class ShopService {
         products.add(new Product("Кастомные пластинки", 9L,95, "SHOW MUST GO ON", 0));
         products.add(new Product("Разбан", 10L,295, "I always come back", 0));
         products.add(new Product("Разбан чата", 11L,145, "Это тантум верде форте", 0));
-        return products;
+        for(Product product: products){
+            productRepository.save(product);
+        }
     }
 
 }
