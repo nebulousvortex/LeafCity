@@ -1,13 +1,22 @@
 package ru.vortex.physics.model.shop;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
     private String name;
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private float price;
     private String description;
     private float sale;
+    private  byte[] image;
 
-    public Product(String name, int id, float price, String description, float sale) {
+    public Product(String name, Long id, float price, String description, float sale) {
         this.name = name;
         this.id = id;
         this.price = price;
@@ -18,15 +27,23 @@ public class Product {
     public Product() {
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
