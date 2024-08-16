@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController()
-@RequestMapping("/api/v1/payment/")
+@RequestMapping("/payment")
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
