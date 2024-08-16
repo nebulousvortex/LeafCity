@@ -2,32 +2,29 @@ package ru.vortex.physics.model.payment;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Payment {
-
-    private Long codeId;
     @Id
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name="uuid", strategy="uuid2")
     private String id;
     private String status;
+    @Embedded
     private Amount amount;
     private String description;
+    @Embedded
     private Recipient recipient;
     private String created_at;
     private boolean test;
     private boolean paid;
     private boolean refundable;
     private boolean capture;
-    private PaymentMethodData payment_method_data;
+    @Embedded
     private Confirmation confirmation;
 
-    public Payment(String id, String status, Amount amount, String description, Recipient recipient, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, PaymentMethodData payment_method_data, Confirmation confirmation) {
+    public Payment(String id, String status, Amount amount, String description, Recipient recipient, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, Confirmation confirmation) {
         this.id = id;
         this.status = status;
         this.amount = amount;
@@ -38,19 +35,10 @@ public class Payment {
         this.paid = paid;
         this.refundable = refundable;
         this.capture = capture;
-        this.payment_method_data = payment_method_data;
         this.confirmation = confirmation;
     }
 
     public Payment() {
-    }
-
-    public Long getCodeId() {
-        return codeId;
-    }
-
-    public void setCodeId(Long codeId) {
-        this.codeId = codeId;
     }
 
     public Confirmation getConfirmation() {
@@ -67,14 +55,6 @@ public class Payment {
 
     public void setCapture(boolean capture) {
         this.capture = capture;
-    }
-
-    public PaymentMethodData getPayment_method_data() {
-        return payment_method_data;
-    }
-
-    public void setPayment_method_data(PaymentMethodData payment_method_data) {
-        this.payment_method_data = payment_method_data;
     }
 
     public String getId() {

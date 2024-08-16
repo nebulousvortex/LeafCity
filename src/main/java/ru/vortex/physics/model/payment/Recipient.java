@@ -1,5 +1,8 @@
 package ru.vortex.physics.model.payment;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Recipient {
     private String account_id;
     private String gateway_id;

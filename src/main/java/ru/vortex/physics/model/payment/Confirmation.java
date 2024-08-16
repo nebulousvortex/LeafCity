@@ -1,5 +1,8 @@
 package ru.vortex.physics.model.payment;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Confirmation {
     private String type;
     private String confirmation_token;

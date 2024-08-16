@@ -6,13 +6,12 @@ spring:
     url: jdbc:mysql://87.251.74.126:3306/shop?serverTimezone=UTC&useLegacyDatetimeCode=false
     username: shop
     password: kq3E-oRNlLCkMNmgZcUAwbAmZOhXnR-KxzxQkzDVI_vProENdK
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: create
     database: MYSQL
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
     properties:
       hibernate:

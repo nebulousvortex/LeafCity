@@ -1,5 +1,8 @@
 package ru.vortex.physics.model.payment;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class PaymentMethodData {
     private String type;
 
