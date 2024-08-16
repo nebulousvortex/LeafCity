@@ -36,6 +36,7 @@ public class PaymentController {
         return newPay;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/getRedirectPayment")
     @ResponseBody
     public ResponseEntity<Map<String, String>> createPaymentRedirect(@RequestBody UserProductRequest userProductRequest) {
@@ -52,7 +53,7 @@ public class PaymentController {
         response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
         return ResponseEntity.ok(response);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getPayments")
     @ResponseBody
     public List<Payment> getPayments() {
