@@ -17,9 +17,7 @@ public class WebhookController {
     @PostMapping("/getNotify")
     @ResponseBody
     public ResponseEntity<String> getNotify(@RequestBody Webhook webhook) {
-        System.out.println("МБ НУЛЛ?");
         if(webhook.getObject() != null){
-            System.out.println("ВСЕ ТАКИ НЕ НУЛЛ");
             paymentService.savePayment(webhook.getObject());
             System.out.println(webhook.getObject().getDescription());
             System.out.println(webhook.getObject().getStatus());

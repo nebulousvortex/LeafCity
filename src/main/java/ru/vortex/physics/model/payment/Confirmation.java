@@ -39,7 +39,7 @@ public class Confirmation {
         this.confirmation_url = confirmation_url;
     }
 
-    public boolean isEnforce() {
+    public boolean getEnforce() {
         return enforce;
     }
 
