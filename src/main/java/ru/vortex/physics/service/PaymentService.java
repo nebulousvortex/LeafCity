@@ -24,6 +24,9 @@ public class PaymentService {
     public List<Payment> getPayments(){
         return paymentRepository.findAll();
     }
+    public Payment getPayment(String id){
+        return paymentRepository.findById(id).orElseThrow();
+    }
     public void savePayment(Payment payment){
         paymentRepository.save(payment);
     }

@@ -21,8 +21,9 @@ public class WebhookController {
     public ResponseEntity<String> getNotify(@RequestBody Webhook webhook) {
         if(webhook.getObject() != null){
             Payment payment =  webhook.getObject();
-            payment.getConfirmation().setEnforce(true);
-            paymentService.savePayment(payment);
+            Payment existingPayment = paymentService.getPayment(webhook.getObject().getId());
+            existingPayment.setStatus(payment.getStatus());
+            paymentService.savePayment(existingPayment);
         }
         return ResponseEntity.ok("Ok");
     }
