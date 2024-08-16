@@ -74,4 +74,5 @@ public class Product {
     public void setSale(float sale) {
         this.sale = sale;
     }
+
 }

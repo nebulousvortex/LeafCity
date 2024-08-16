@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.vortex.physics.model.payment.Amount;
 import ru.vortex.physics.model.payment.Confirmation;
 import ru.vortex.physics.model.payment.Payment;
+import ru.vortex.physics.model.request.UserProductRequest;
+import ru.vortex.physics.model.shop.Product;
 import ru.vortex.physics.service.PaymentService;
+import ru.vortex.physics.service.ShopService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,9 +19,10 @@ import java.util.Map;
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private ShopService shopService;
 
     @PostMapping("/getEmbeddedPayment")
-    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     public Payment createEmbeddedPayment() {
         Payment newPay = new Payment();
@@ -32,17 +36,20 @@ public class PaymentController {
     }
 
     @PostMapping("/getRedirectPayment")
-    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
-    public Payment createPaymentRedirect() {
+    public ResponseEntity<Map<String, String>> createPaymentRedirect(@RequestBody UserProductRequest userProductRequest) {
         Payment newPay = new Payment();
-        newPay.setAmount(new Amount("1", "RUB"));
-        newPay.setDescription("Тестовое описание для redirect");
-        newPay.setCapture(true);
-        newPay.setConfirmation(new Confirmation("redirect", "https://leafcity.ru/shop", "https://leafcity.ru/shop"));
 
+        Product product = shopService.getProductById(userProductRequest.getProductId());
+        newPay.setAmount(new Amount(Float.toString(product.getPrice()), "RUB"));
+        newPay.setDescription(product.getName());
+        newPay.setCapture(true);
+        newPay.setConfirmation(new Confirmation("redirect", "", "http://localhost:3000/shop"));
         newPay = paymentService.createPayment(newPay);
-        return newPay;
+
+        Map<String, String> response = new HashMap<>();
+        response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/getConfirmationToken")
