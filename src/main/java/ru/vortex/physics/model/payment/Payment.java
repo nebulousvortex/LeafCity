@@ -1,7 +1,19 @@
 package ru.vortex.physics.model.payment;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Payment {
 
+    private Long codeId;
+    @Id
+    @GeneratedValue(generator="uuid")
+    @GenericGenerator(name="uuid", strategy="uuid2")
     private String id;
     private String status;
     private Amount amount;
@@ -32,6 +44,15 @@ public class Payment {
 
     public Payment() {
     }
+
+    public Long getCodeId() {
+        return codeId;
+    }
+
+    public void setCodeId(Long codeId) {
+        this.codeId = codeId;
+    }
+
     public Confirmation getConfirmation() {
         return confirmation;
     }

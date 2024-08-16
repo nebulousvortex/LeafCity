@@ -1,5 +1,6 @@
 package ru.vortex.physics.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -7,13 +8,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.client.RestTemplate;
 import ru.vortex.physics.model.payment.Payment;
+import ru.vortex.physics.model.shop.Product;
+import ru.vortex.physics.repository.PaymentRepository;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 @Service
 public class PaymentService {
+    @Autowired
+    PaymentRepository paymentRepository;
+
+    public List<Payment> getPayments(){
+        return paymentRepository.findAll();
+    }
+    public void savePayment(Payment payment){
+        paymentRepository.save(payment);
+    }
 
     public Payment createPayment(Payment payment) {
         RestTemplate restTemplate = new RestTemplate();
@@ -31,8 +44,11 @@ public class PaymentService {
         headers.set("Idempotence-Key",IdempotenceKey);
 
         HttpEntity<Payment> request = new HttpEntity<>(payment, headers);
-
-        return restTemplate.postForObject("https://api.yookassa.ru/v3/payments", request, Payment.class);
+        Payment newPayment = restTemplate.postForObject("https://api.yookassa.ru/v3/payments", request, Payment.class);
+        if(newPayment != null) {
+            paymentRepository.save(newPayment);
+        }
+        return newPayment;
     }
 
     private String getRandomString(){

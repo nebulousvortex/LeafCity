@@ -12,6 +12,7 @@ import ru.vortex.physics.service.PaymentService;
 import ru.vortex.physics.service.ShopService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController()
@@ -52,18 +53,9 @@ public class PaymentController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/getConfirmationToken")
+    @GetMapping("/getPayments")
     @ResponseBody
-    public ResponseEntity<Map<String, String>> getConfirmationToken() {
-        Payment newPay = new Payment();
-        newPay.setAmount(new Amount("1", "RUB"));
-        newPay.setCapture(true);
-        newPay.setConfirmation(new Confirmation("embedded"));
-
-        newPay = paymentService.createPayment(newPay);
-        Map<String, String> response = new HashMap<>();
-        response.put("confirmation_token", newPay.getConfirmation().getConfirmation_token());
-
-        return ResponseEntity.ok(response);
+    public List<Payment> getPayments() {
+        return paymentService.getPayments();
     }
 }
