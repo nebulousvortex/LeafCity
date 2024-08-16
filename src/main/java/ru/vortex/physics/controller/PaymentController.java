@@ -59,4 +59,11 @@ public class PaymentController {
     public List<Payment> getPayments() {
         return paymentService.getPayments();
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getPayment")
+    @ResponseBody
+    public Payment getPayment(@RequestParam  String id) {
+        return paymentService.getPayment(id);
+    }
 }
