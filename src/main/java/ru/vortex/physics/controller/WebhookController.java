@@ -3,14 +3,9 @@ package ru.vortex.physics.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vortex.physics.model.payment.Payment;
 import ru.vortex.physics.model.payment.Webhook;
-import ru.vortex.physics.model.shop.Product;
-import ru.vortex.physics.repository.PaymentRepository;
 import ru.vortex.physics.service.PaymentService;
 
-import java.util.List;
-import java.util.Map;
 
 @RestController()
 @RequestMapping("/webhook")
@@ -22,8 +17,12 @@ public class WebhookController {
     @PostMapping("/getNotify")
     @ResponseBody
     public ResponseEntity<String> getNotify(@RequestBody Webhook webhook) {
-        if(webhook.getPayment() != null){
-            paymentService.savePayment(webhook.getPayment());
+        System.out.println("МБ НУЛЛ?");
+        if(webhook.getObject() != null){
+            System.out.println("ВСЕ ТАКИ НЕ НУЛЛ");
+            paymentService.savePayment(webhook.getObject());
+            System.out.println(webhook.getObject().getDescription());
+            System.out.println(webhook.getObject().getStatus());
         }
         return ResponseEntity.ok("Ok");
     }

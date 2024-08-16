@@ -3,12 +3,12 @@ package ru.vortex.physics.model.payment;
 public class Webhook {
     private String type;
     private String event;
-    private Payment payment;
+    private Payment object;
 
-    public Webhook(String type, String event, Payment payment) {
+    public Webhook(String type, String event, Payment object) {
         this.type = type;
         this.event = event;
-        this.payment = payment;
+        this.object = object;
     }
 
     public Webhook() {
@@ -30,11 +30,11 @@ public class Webhook {
         this.event = event;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public Payment getObject() {
+        return object;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setObject(Payment payment) {
+        this.object = payment;
     }
 }
