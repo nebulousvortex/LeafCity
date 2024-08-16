@@ -18,6 +18,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/getEmbeddedPayment")
+    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     public Payment createEmbeddedPayment() {
         Payment newPay = new Payment();
@@ -31,6 +32,7 @@ public class PaymentController {
     }
 
     @PostMapping("/getRedirectPayment")
+    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     public Payment createPaymentRedirect() {
         Payment newPay = new Payment();

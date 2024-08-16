@@ -16,20 +16,31 @@ public class ShopController {
     private ShopService shopService;
 
     @GetMapping("/getProducts")
+    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     public List<Product> getProducts() {
         return shopService.getProducts();
     }
 
     @GetMapping("/getProduct")
+    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     public Product getProduct(@RequestParam  Long id) {
         return shopService.getProductById(id);
     }
 
     @PostMapping("/createProducts")
+    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     public void createProducts() {
         shopService.saveProducts();
     }
+
+    @PostMapping("/createProduct")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseBody
+    public void createProduct(@RequestBody Product product) {
+        shopService.saveProduct(product);
+    }
 }
+

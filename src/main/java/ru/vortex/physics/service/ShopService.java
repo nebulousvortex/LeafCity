@@ -21,6 +21,8 @@ public class ShopService {
         return productRepository.findById(id).orElseThrow();
     }
 
+    public void saveProduct(Product product){ productRepository.save(product);}
+
     public void saveProducts(){
         ArrayList<Product> products = new ArrayList<Product>();
         products.add(new Product("Подписька",1L, 145, "Блин, купи пж пж", 0));
