@@ -12,17 +12,38 @@ public class Product {
     private float price;
     private String description;
     private float sale;
-    private  String imageUrl;
+    private String imageUrl;
+    private String duration;
+    private String category;
 
-    public Product(String name, Long id, float price, String description, float sale) {
-        this.name = name;
+    public Product(Long id, String name, float price, String description, float sale, String imageUrl, String duration, String category) {
         this.id = id;
+        this.name = name;
         this.price = price;
         this.description = description;
         this.sale = sale;
+        this.imageUrl = imageUrl;
+        this.duration = duration;
+        this.category = category;
     }
 
     public Product() {
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public String getImageUrl() {
