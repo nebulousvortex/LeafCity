@@ -42,5 +42,18 @@ public class ShopController {
     public void createProduct(@RequestBody Product product) {
         shopService.saveProduct(product);
     }
-}
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @DeleteMapping("/deleteProduct")
+    @ResponseBody
+    public void deleteProduct(@RequestBody Product product) {
+        shopService.deleteProduct(product);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PatchMapping("/patchProduct")
+    @ResponseBody
+    public void patchProduct(@RequestBody Product product) {
+        shopService.patchProduct(product);
+    }
+}
