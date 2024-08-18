@@ -37,8 +37,8 @@ public class ShopService {
         if(product.getPrice() != 0f){
             existingProduct.setPrice(product.getPrice());
         }
-        if(product.getImage() != null){
-            existingProduct.setImage(product.getImage());
+        if(product.getImageUrl() != null){
+            existingProduct.setImageUrl(product.getImageUrl());
         }
         productRepository.save(existingProduct);
     }

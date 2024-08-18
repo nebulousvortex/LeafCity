@@ -12,7 +12,7 @@ public class Product {
     private float price;
     private String description;
     private float sale;
-    private  String image;
+    private  String imageUrl;
 
     public Product(String name, Long id, float price, String description, float sale) {
         this.name = name;
@@ -25,12 +25,12 @@ public class Product {
     public Product() {
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
