@@ -1,7 +1,5 @@
 package ru.vortex.physics.model.payment;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
@@ -9,11 +7,7 @@ public class Payment {
     @Id
     private String id;
     private String status;
-    @Embedded
-    private Amount amount;
     private String description;
-    @Embedded
-    private Recipient recipient;
     private String created_at;
     private boolean test;
     private boolean paid;
@@ -21,19 +15,26 @@ public class Payment {
     private boolean capture;
     @Embedded
     private Confirmation confirmation;
+    @Embedded
+    private PaymentMeta metadata;
+    @Embedded
+    private Recipient recipient;
+    @Embedded
+    private Amount amount;
 
-    public Payment(String id, String status, Amount amount, String description, Recipient recipient, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, Confirmation confirmation) {
+    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount) {
         this.id = id;
         this.status = status;
-        this.amount = amount;
         this.description = description;
-        this.recipient = recipient;
         this.created_at = created_at;
         this.test = test;
         this.paid = paid;
         this.refundable = refundable;
         this.capture = capture;
         this.confirmation = confirmation;
+        this.metadata = metadata;
+        this.recipient = recipient;
+        this.amount = amount;
     }
 
     public Payment() {
@@ -127,4 +128,11 @@ public class Payment {
         this.refundable = refundable;
     }
 
+    public PaymentMeta getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(PaymentMeta metadata) {
+        this.metadata = metadata;
+    }
 }
