@@ -12,7 +12,6 @@ public class Product {
     private float price;
     private String description;
     private float sale;
-    @Lob
     private  String image;
 
     public Product(String name, Long id, float price, String description, float sale) {
