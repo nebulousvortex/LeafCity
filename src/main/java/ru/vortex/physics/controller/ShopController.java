@@ -30,13 +30,6 @@ public class ShopController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/createProducts")
-    @ResponseBody
-    public void createProducts() {
-        shopService.saveProducts();
-    }
-
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/createProduct")
     @ResponseBody
     public void createProduct(@RequestBody Product product) {
