@@ -15,35 +15,35 @@ public class ShopController {
     @Autowired
     private ShopService shopService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @GetMapping("/getProducts")
     @ResponseBody
     public List<Product> getProducts() {
         return shopService.getProducts();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @GetMapping("/getProduct")
     @ResponseBody
     public Product getProduct(@RequestParam  Long id) {
         return shopService.getProductById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @PostMapping("/createProduct")
     @ResponseBody
     public void createProduct(@RequestBody Product product) {
         shopService.saveProduct(product);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @DeleteMapping("/deleteProduct")
     @ResponseBody
     public void deleteProduct(@RequestBody Product product) {
         shopService.deleteProduct(product);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @PatchMapping("/patchProduct")
     @ResponseBody
     public void patchProduct(@RequestBody Product product) {

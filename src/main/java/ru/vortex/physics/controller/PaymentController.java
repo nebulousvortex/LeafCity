@@ -25,7 +25,7 @@ public class PaymentController {
     @Autowired
     private ShopService shopService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @PostMapping("/getRedirectPayment")
     @ResponseBody
     public ResponseEntity<Map<String, String>> createPaymentRedirect(@RequestBody UserProductRequest userProductRequest) {
@@ -43,21 +43,21 @@ public class PaymentController {
         response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
         return ResponseEntity.ok(response);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @GetMapping("/getPayments")
     @ResponseBody
     public List<Payment> getPayments() {
         return paymentService.getPayments();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @GetMapping("/getPayment")
     @ResponseBody
     public Payment getPayment(@RequestParam  String id) {
         return paymentService.getPayment(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
     @GetMapping("/getLastPayments")
     @ResponseBody
     public List<Map<String, Object>> getLastPayments() {
@@ -79,7 +79,7 @@ public class PaymentController {
                 e.printStackTrace();
             }
 
-            Long diffInMillis = System.currentTimeMillis() - createdDate.getTime();
+            long diffInMillis = System.currentTimeMillis() - createdDate.getTime();
             Long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
             String daysAgo ="";
             if (diffDays==0){
