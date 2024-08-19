@@ -25,7 +25,7 @@ public class PaymentController {
     @Autowired
     private ShopService shopService;
 
-    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "http://192.168.100.7:3000"})
     @PostMapping("/getRedirectPayment")
     @ResponseBody
     public ResponseEntity<Map<String, String>> createPaymentRedirect(@RequestBody UserProductRequest userProductRequest) {
@@ -43,62 +43,24 @@ public class PaymentController {
         response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
         return ResponseEntity.ok(response);
     }
-    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "http://192.168.100.7:3000"})
     @GetMapping("/getPayments")
     @ResponseBody
     public List<Payment> getPayments() {
         return paymentService.getPayments();
     }
 
-    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "http://192.168.100.7:3000"})
     @GetMapping("/getPayment")
     @ResponseBody
     public Payment getPayment(@RequestParam  String id) {
         return paymentService.getPayment(id);
     }
 
-    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app/", "http://192.168.100.7:3000/"})
+    @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "http://192.168.100.7:3000"})
     @GetMapping("/getLastPayments")
     @ResponseBody
     public List<Map<String, Object>> getLastPayments() {
-        List<Payment> allPayments = paymentService.getPayments();
-        allPayments.sort(Comparator.comparing(Payment::getCreated_at).reversed());
-        List<Payment> lastPayments = allPayments.subList(0, Math.min(10, allPayments.size()));
-
-        List<Map<String, Object>> jsonResults = new ArrayList<>();
-
-        for (Payment payment : lastPayments) {
-            Map<String, Object> paymentJson = new HashMap<>();
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-            Date createdDate = null;
-            try {
-                createdDate = formatter.parse(payment.getCreated_at());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            long diffInMillis = System.currentTimeMillis() - createdDate.getTime();
-            Long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-            String daysAgo ="";
-            if (diffDays==0){
-                daysAgo = "сегодня!";
-            }else if (diffDays.toString().endsWith("1")){
-                daysAgo = diffDays + "день назад";
-            }
-            else if (diffDays.toString().endsWith("2")||diffDays.toString().endsWith("3")||diffDays.toString().endsWith("4")){
-                daysAgo = diffDays + "дня назад";
-            }else{
-                daysAgo = diffDays + "дней назад";
-            }
-
-            paymentJson.put("daysAgo", daysAgo);
-            paymentJson.put("username", payment.getMetadata().getUsername());
-            paymentJson.put("product_id", payment.getMetadata().getProductId());
-            jsonResults.add(paymentJson);
-        }
-
-        return jsonResults;
+        return paymentService.getLastPayments();
     }
 }

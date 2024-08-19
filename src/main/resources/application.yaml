@@ -13,7 +13,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate #create create-drop none update validate
+      ddl-auto: create #create create-drop none update validate
     database: MYSQL
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false

@@ -12,6 +12,7 @@ public class Product {
     private float price;
     private String description;
     private float sale;
+    @Column(columnDefinition = "TEXT")
     private String imageUrl;
     private String duration;
     private String category;
