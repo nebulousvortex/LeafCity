@@ -23,14 +23,12 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("auth")
 public class AuthController {
-
     @Autowired
     AuthService authService;
     @Autowired
     UserService userService;
     @Autowired
     RoleService roleService;
-
     @Autowired
     Validator validator;
 
