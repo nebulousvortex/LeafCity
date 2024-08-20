@@ -3,6 +3,7 @@ package ru.vortex.physics.conf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,17 +34,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/register").hasRole("USER")
+                .antMatchers("/auth/registration").hasRole("USER")
                 .antMatchers("/auth/role").hasRole("USER")
                 .antMatchers("/auth/login").permitAll()
-                .antMatchers("/shop/getProducts").permitAll()
-                .antMatchers("/shop/getProduct").permitAll()
-                .antMatchers("/shop/createProduct").hasRole("USER")
-                .antMatchers("/shop/deleteProduct").hasRole("USER")
-                .antMatchers("/shop/patchProduct").hasRole("USER")
+
+                .antMatchers("/shop/Products").permitAll()
+                .antMatchers(HttpMethod.GET, "/shop/product").permitAll()
+                .antMatchers(HttpMethod.POST, "/shop/product").hasRole("USER")
+                .antMatchers(HttpMethod.DELETE, "/shop/product").hasRole("USER")
+                .antMatchers(HttpMethod.PATCH, "/shop/product").hasRole("USER")
+
+                .antMatchers("/shop/duration").hasRole("USER")
+
+                .antMatchers("/shop/category").hasRole("USER")
+
                 .antMatchers("/payment/**").permitAll()
                 .antMatchers("/webhook/**").permitAll()
-                .antMatchers("/api/v1/admin/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
