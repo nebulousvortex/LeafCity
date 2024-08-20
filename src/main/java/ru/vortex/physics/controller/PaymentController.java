@@ -13,9 +13,7 @@ import ru.vortex.physics.service.PaymentService;
 import ru.vortex.physics.service.ShopService;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @RestController()
 @RequestMapping("/payment")
@@ -60,7 +58,7 @@ public class PaymentController {
     @CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "http://192.168.100.7:3000"})
     @GetMapping("/getLastPayments")
     @ResponseBody
-    public List<Map<String, Object>> getLastPayments() {
+    public List<Map<String, Object>> getLastPayments() throws ParseException {
         return paymentService.getLastPayments();
     }
 }

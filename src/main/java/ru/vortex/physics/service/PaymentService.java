@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class PaymentService {
     @Autowired
     PaymentRepository paymentRepository;
+    @Autowired
+    ShopService shopService;
 
     public List<Payment> getPayments(){
         return paymentRepository.findAll();
@@ -55,7 +57,7 @@ public class PaymentService {
         return newPayment;
     }
 
-    public List<Map<String, Object>> getLastPayments(){
+    public List<Map<String, Object>> getLastPayments() throws ParseException {
         List<Payment> allPayments = getPayments();
         allPayments.sort(Comparator.comparing(Payment::getCreated_at).reversed());
         List<Payment> lastPayments = allPayments.subList(0, Math.min(10, allPayments.size()));
@@ -67,19 +69,20 @@ public class PaymentService {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
             Date createdDate = null;
-            try {
-                createdDate = formatter.parse(payment.getCreated_at());
-            } catch (ParseException e) {
-                e.printStackTrace();
+
+            createdDate = formatter.parse(payment.getCreated_at());
+
+
+            if(createdDate != null) {
+                long diffInMillis = System.currentTimeMillis() - createdDate.getTime();
+                String daysAgo = getDaysAgoCount(diffInMillis);
+
+                paymentJson.put("daysAgo", daysAgo);
+                paymentJson.put("username", payment.getMetadata().getUsername());
+                paymentJson.put("imageUrl", shopService.getProductById(payment.getMetadata().getProductId()));
+                paymentJson.put("key", payment.getCreated_at());
+                jsonResults.add(paymentJson);
             }
-
-            long diffInMillis = System.currentTimeMillis() - createdDate.getTime();
-            String daysAgo = getDaysAgoCount(diffInMillis);
-
-            paymentJson.put("daysAgo", daysAgo);
-            paymentJson.put("username", payment.getMetadata().getUsername());
-            paymentJson.put("product_id", payment.getMetadata().getProductId());
-            jsonResults.add(paymentJson);
         }
         return jsonResults;
     }
