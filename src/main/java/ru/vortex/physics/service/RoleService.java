@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.vortex.physics.model.user.Role;
 import ru.vortex.physics.repository.RoleRepository;
 
-/**
- * Сервис работы с ролями
- */
 @Service
 public class RoleService {
     @Autowired

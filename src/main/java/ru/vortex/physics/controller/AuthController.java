@@ -66,7 +66,7 @@ public class AuthController {
             if (!userService.saveUser(user)) {
                 return ResponseEntity.ok("Пользователь с таким именем уже существует");
             }
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok("Зарегестрирован");
         }
     }
 
