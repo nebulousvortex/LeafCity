@@ -14,10 +14,14 @@ public class Product {
     private float sale;
     @Column(columnDefinition = "TEXT")
     private String imageUrl;
-    private String duration;
-    private String category;
+    @ManyToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "duration_id")
+    private Duration duration;
+    @ManyToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    public Product(Long id, String name, float price, String description, float sale, String imageUrl, String duration, String category) {
+    public Product(Long id, String name, float price, String description, float sale, String imageUrl, Duration duration, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -30,20 +34,25 @@ public class Product {
 
     public Product() {
     }
+    @PreRemove
+    private void clearProduct(){
+        this.category = null;
+        this.duration = null;
+    }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public String getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
