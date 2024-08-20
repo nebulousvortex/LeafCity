@@ -79,7 +79,7 @@ public class PaymentService {
 
                 paymentJson.put("daysAgo", daysAgo);
                 paymentJson.put("username", payment.getMetadata().getUsername());
-                paymentJson.put("imageUrl", shopService.getProductById(payment.getMetadata().getProductId()));
+                paymentJson.put("imageUrl", shopService.getProductById(payment.getMetadata().getProductId()).getImageUrl());
                 paymentJson.put("key", payment.getCreated_at());
                 jsonResults.add(paymentJson);
             }
