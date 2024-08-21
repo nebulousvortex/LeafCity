@@ -34,7 +34,7 @@ public class PaymentController {
         newPay.setDescription(product.getName());
         newPay.setCapture(true);
         newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));
-        newPay.setConfirmation(new Confirmation("redirect", "", "http://localhost:3000/shop"));
+        newPay.setConfirmation(new Confirmation("redirect", "", "https://leafcity.vercel.app/shop"));
         newPay = paymentService.createPayment(newPay);
 
         Map<String, String> response = new HashMap<>();
