@@ -12,6 +12,8 @@ public class Product {
     private float price;
     private String description;
     private float sale;
+    private String command;
+    private String notify;
     @Column(columnDefinition = "TEXT")
     private String imageUrl;
     @ManyToOne(cascade = CascadeType.ALL, optional = true)
@@ -21,12 +23,15 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Product(Long id, String name, float price, String description, float sale, String imageUrl, Duration duration, Category category) {
+    public Product(Long id, String name, float price, String description, float sale, String command,
+                   String notify, String imageUrl, Duration duration, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.sale = sale;
+        this.command = command;
+        this.notify = notify;
         this.imageUrl = imageUrl;
         this.duration = duration;
         this.category = category;
@@ -38,6 +43,22 @@ public class Product {
     private void clearProduct(){
         this.category = null;
         this.duration = null;
+    }
+
+    public String getNotify() {
+        return notify;
+    }
+
+    public void setNotify(String notify) {
+        this.notify = notify;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
     }
 
     public Category getCategory() {

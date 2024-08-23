@@ -37,6 +37,21 @@ public class ShopService {
         if(product.getPrice() != 0f){
             existingProduct.setPrice(product.getPrice());
         }
+        if(product.getSale() >= 0f){
+            existingProduct.setSale(product.getSale());
+        }
+        if(product.getCommand()!= null){
+            existingProduct.setCommand(product.getCommand());
+        }
+        if(product.getNotify()!= null){
+            existingProduct.setNotify(product.getNotify());
+        }
+        if(product.getDuration()!= null){
+            existingProduct.setDuration(product.getDuration());
+        }
+        if(product.getCategory()!= null){
+            existingProduct.setCategory(product.getCategory());
+        }
         if(product.getImageUrl() != null){
             existingProduct.setImageUrl(product.getImageUrl());
         }
