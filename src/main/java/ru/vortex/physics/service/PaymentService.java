@@ -77,12 +77,14 @@ public class PaymentService {
                 long diffInMillis = System.currentTimeMillis() - createdDate.getTime();
                 String daysAgo = getDaysAgoCount(diffInMillis);
                 var existingProduct = shopService.getProductById(payment.getMetadata().getProductId());
-                paymentJson.put("daysAgo", daysAgo);
-                paymentJson.put("username", payment.getMetadata().getUsername());
-                paymentJson.put("imageUrl", existingProduct.getImageUrl());
-                paymentJson.put("productName", existingProduct.getName());
-                paymentJson.put("key", payment.getCreated_at());
-                jsonResults.add(paymentJson);
+                if (existingProduct != null) {
+                    paymentJson.put("daysAgo", daysAgo);
+                    paymentJson.put("username", payment.getMetadata().getUsername());
+                    paymentJson.put("imageUrl", existingProduct.getImageUrl());
+                    paymentJson.put("productName", existingProduct.getName());
+                    paymentJson.put("key", payment.getCreated_at());
+                    jsonResults.add(paymentJson);
+                }
             }
         }
         return jsonResults;
@@ -92,14 +94,14 @@ public class PaymentService {
         Long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
         String daysAgo ="";
         if (diffDays==0){
-            daysAgo = "сегодня!";
+            daysAgo = "сегодня";
         }else if (diffDays.toString().endsWith("1")){
-            daysAgo = diffDays + "день назад";
+            daysAgo = diffDays + " день назад";
         }
         else if (diffDays.toString().endsWith("2")||diffDays.toString().endsWith("3")||diffDays.toString().endsWith("4")){
-            daysAgo = diffDays + "дня назад";
+            daysAgo = diffDays + " дня назад";
         }else{
-            daysAgo = diffDays + "дней назад";
+            daysAgo = diffDays + " дней назад";
         }
         return daysAgo;
     }

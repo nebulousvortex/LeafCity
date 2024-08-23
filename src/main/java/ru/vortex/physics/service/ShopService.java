@@ -18,7 +18,8 @@ public class ShopService {
     }
 
     public Product getProductById(Long id){
-        return productRepository.findById(id).orElseThrow();
+        var product =  productRepository.findById(id);
+        return product.orElse(null);
     }
 
     public void saveProduct(Product product){ productRepository.save(product);}
