@@ -92,7 +92,7 @@ public class PaymentService {
         Long diffDays = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
         String daysAgo ="";
         if (diffDays==0){
-            daysAgo = "сегодня!";
+            daysAgo = "сегодня";
         }else if (diffDays.toString().endsWith("1")){
             daysAgo = diffDays + " день назад";
         }
