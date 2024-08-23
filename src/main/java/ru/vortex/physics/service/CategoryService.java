@@ -15,7 +15,7 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
     public Category findCategory(Long id){
-        return categoryRepository.findById(id).orElseThrow();
+        return categoryRepository.findById(id).orElse(null);
     }
     public void createCategory(Category category){
         categoryRepository.save(category);

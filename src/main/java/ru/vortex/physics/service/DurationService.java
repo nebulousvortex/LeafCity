@@ -16,7 +16,7 @@ public class DurationService {
     @Autowired
     DurationRepository durationRepository;
     public Duration findDuration(Long id){
-        return durationRepository.findById(id).orElseThrow();
+        return durationRepository.findById(id).orElse(null);
     }
     public void createDuration(Duration duration){
         durationRepository.save(duration);

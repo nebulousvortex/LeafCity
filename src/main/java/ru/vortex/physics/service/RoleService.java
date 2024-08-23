@@ -15,7 +15,7 @@ public class RoleService {
     }
 
     public Role findById(Long roleId) {
-        return roleRepository.findById(roleId).orElseThrow();
+        return roleRepository.findById(roleId).orElse(null);
     }
 
     public void createRole(Role role){

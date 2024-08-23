@@ -28,7 +28,7 @@ public class PaymentService {
         return paymentRepository.findAll();
     }
     public Payment getPayment(String id){
-        return paymentRepository.findById(id).orElseThrow();
+        return paymentRepository.findById(id).orElse(null);
     }
     public void savePayment(Payment payment){
         paymentRepository.save(payment);

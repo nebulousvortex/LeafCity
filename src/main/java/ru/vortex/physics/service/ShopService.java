@@ -12,14 +12,17 @@ import java.util.List;
 public class ShopService {
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    DurationService durationService;
+    @Autowired
+    CategoryService categoryService;
 
     public List<Product> getProducts() {
         return productRepository.findAll();
     }
 
     public Product getProductById(Long id){
-        var product =  productRepository.findById(id);
-        return product.orElse(null);
+        return productRepository.findById(id).orElse(null);
     }
 
     public void saveProduct(Product product){ productRepository.save(product);}
@@ -48,10 +51,10 @@ public class ShopService {
             existingProduct.setNotify(product.getNotify());
         }
         if(product.getDuration()!= null){
-            existingProduct.setDuration(product.getDuration());
+            existingProduct.setDuration(durationService.findDuration(product.getDuration().getId()));
         }
         if(product.getCategory()!= null){
-            existingProduct.setCategory(product.getCategory());
+            existingProduct.setCategory(categoryService.findCategory(product.getCategory().getId()));
         }
         if(product.getImageUrl() != null){
             existingProduct.setImageUrl(product.getImageUrl());
