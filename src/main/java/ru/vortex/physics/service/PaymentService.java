@@ -94,12 +94,12 @@ public class PaymentService {
         if (diffDays==0){
             daysAgo = "сегодня!";
         }else if (diffDays.toString().endsWith("1")){
-            daysAgo = diffDays + "день назад";
+            daysAgo = diffDays + " день назад";
         }
         else if (diffDays.toString().endsWith("2")||diffDays.toString().endsWith("3")||diffDays.toString().endsWith("4")){
-            daysAgo = diffDays + "дня назад";
+            daysAgo = diffDays + " дня назад";
         }else{
-            daysAgo = diffDays + "дней назад";
+            daysAgo = diffDays + " дней назад";
         }
         return daysAgo;
     }
