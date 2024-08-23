@@ -1,8 +1,8 @@
 package ru.vortex.physics.utils;
 
-import net.kronos.rkon.core.ex.AuthenticationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import ru.vortex.physics.utils.ex.AuthenticationException;
 
 import java.io.IOException;
 
