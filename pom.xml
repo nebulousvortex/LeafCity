@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>ru.vortex</groupId>
-    <artifactId>Minecraft</artifactId>
+    <artifactId>LeafCity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Minecraft</name>
-    <description>Backend part of payment system</description>
+    <description>Backend leafcity's site</description>
     <properties>
         <java.version>11</java.version>
     </properties>
