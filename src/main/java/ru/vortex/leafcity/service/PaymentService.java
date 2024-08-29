@@ -57,7 +57,7 @@ public class PaymentService {
     }
 
     public List<Map<String, Object>> getLastPayments() throws ParseException {
-        List<Payment> allPayments = getPayments();
+        List<Payment> allPayments = paymentRepository.findByStatus("succeeded");
         allPayments.sort(Comparator.comparing(Payment::getCreated_at).reversed());
         List<Payment> lastPayments = allPayments.subList(0, Math.min(10, allPayments.size()));
         List<Map<String, Object>> jsonResults = new ArrayList<>();
