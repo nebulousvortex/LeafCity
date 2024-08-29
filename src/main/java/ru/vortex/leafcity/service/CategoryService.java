@@ -17,8 +17,8 @@ public class CategoryService {
     public void createCategory(Category category){
         categoryRepository.save(category);
     }
-    public void deleteCategory(Category category){
-        categoryRepository.delete(category);
+    public void deleteCategory(Long category){
+        categoryRepository.deleteById(category);
     }
     public List<Category> findAll(){
         return categoryRepository.findAll();

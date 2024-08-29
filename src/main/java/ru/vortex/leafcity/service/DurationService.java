@@ -17,8 +17,8 @@ public class DurationService {
     public void createDuration(Duration duration){
         durationRepository.save(duration);
     }
-    public void deleteDuration(Duration duration){
-        durationRepository.delete(duration);
+    public void deleteDuration(Long duration){
+        durationRepository.deleteById(duration);
     }
 
     public List<Duration> findAll(){
