@@ -1,6 +1,7 @@
 package ru.vortex.leafcity.model.shop;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -25,19 +26,10 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Product(Long id, String name, float price, String description, float sale, String command,
-                   String notify, String imageUrl, Duration duration, Category category) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.sale = sale;
-        this.command = command;
-        this.notify = notify;
-        this.imageUrl = imageUrl;
-        this.duration = duration;
-        this.category = category;
-    }
+    @ElementCollection
+    private List<String> features;
+    @ElementCollection
+    private List<String> abilities;
 
     public Product() {
     }
@@ -45,6 +37,22 @@ public class Product {
     private void clearProduct(){
         this.category = null;
         this.duration = null;
+    }
+
+    public List<String> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<String> abilities) {
+        this.abilities = abilities;
+    }
+
+    public List<String> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(List<String> features) {
+        this.features = features;
     }
 
     public String getNotify() {

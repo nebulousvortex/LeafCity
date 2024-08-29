@@ -34,6 +34,12 @@ public class ShopService {
         if(product.getName() != null){
             existingProduct.setName(product.getName());
         }
+        if(product.getFeatures() != null){
+            existingProduct.setFeatures(product.getFeatures());
+        }
+        if(product.getAbilities() != null){
+            existingProduct.setAbilities(product.getAbilities());
+        }
         if(product.getDescription() != null){
             existingProduct.setDescription(product.getDescription());
         }
