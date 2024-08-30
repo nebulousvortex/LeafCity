@@ -40,8 +40,8 @@ public class ShopService {
         if(product.getAbilities() != null){
             existingProduct.setAbilities(product.getAbilities());
         }
-        if(product.getDescription() != null){
-            existingProduct.setDescription(product.getDescription());
+        if(product.getAbout() != null){
+            existingProduct.setAbout(product.getAbout());
         }
         if(product.getPrice() != 0f){
             existingProduct.setPrice(product.getPrice());

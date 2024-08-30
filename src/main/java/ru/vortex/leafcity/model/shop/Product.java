@@ -11,7 +11,8 @@ public class Product {
     private Long id;
     private String name;
     private float price;
-    private String description;
+    @ElementCollection
+    private List<Information> about;
     private float sale;
     private String command;
     private String notify;
@@ -29,7 +30,7 @@ public class Product {
     @ElementCollection
     private List<String> features;
     @ElementCollection
-    private List<String> abilities;
+    private List<Information> abilities;
 
     public Product() {
     }
@@ -39,11 +40,11 @@ public class Product {
         this.duration = null;
     }
 
-    public List<String> getAbilities() {
+    public List<Information> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(List<String> abilities) {
+    public void setAbilities(List<Information> abilities) {
         this.abilities = abilities;
     }
 
@@ -119,12 +120,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Information> getAbout() {
+        return about;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAbout(List<Information> about) {
+        this.about = about;
     }
 
     public float getSale() {

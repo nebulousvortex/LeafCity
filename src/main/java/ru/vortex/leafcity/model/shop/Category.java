@@ -9,14 +9,14 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String Name;
+    private String description;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
-    public Category(Long id, String name) {
+    public Category(Long id, String description) {
         this.id = id;
-        Name = name;
+        this.description = description;
     }
 
     public Category() {
@@ -30,11 +30,11 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return Name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
