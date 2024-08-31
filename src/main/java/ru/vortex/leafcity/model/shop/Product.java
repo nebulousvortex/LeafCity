@@ -16,6 +16,7 @@ public class Product {
     private float sale;
     private String command;
     private String notify;
+    private int orderNum;
     @Transient
     private float realPrice;
     @Column(columnDefinition = "TEXT")
@@ -26,11 +27,11 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "category_id")
     private Category category;
-
     @ElementCollection
     private List<String> features;
     @ElementCollection
     private List<Information> abilities;
+
 
     public Product() {
     }
@@ -38,6 +39,14 @@ public class Product {
     private void clearProduct(){
         this.category = null;
         this.duration = null;
+    }
+
+    public int getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
     }
 
     public List<Information> getAbilities() {

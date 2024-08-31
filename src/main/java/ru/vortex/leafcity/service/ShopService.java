@@ -17,7 +17,7 @@ public class ShopService {
     CategoryService categoryService;
 
     public List<Product> getProducts() {
-        return productRepository.findAll();
+        return productRepository.findAllSortedByOrder();
     }
 
     public Product getProductById(Long id){
