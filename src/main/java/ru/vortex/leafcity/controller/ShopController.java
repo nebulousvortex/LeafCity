@@ -63,8 +63,8 @@ public class ShopController {
     }
     @DeleteMapping("/category")
     @ResponseBody
-    public ResponseEntity<String> deleteCategory(@RequestBody Long category) {
-        categoryService.deleteCategory(category);
+    public ResponseEntity<String> deleteCategory(@RequestBody Category category) {
+        categoryService.deleteCategory(category.getId());
         return ResponseEntity.ok("Ok");
     }
     @PostMapping("/duration")
@@ -75,8 +75,8 @@ public class ShopController {
     }
     @DeleteMapping("/duration")
     @ResponseBody
-    public ResponseEntity<String> deleteDuration(@RequestBody Long duration) {
-        durationService.deleteDuration(duration);
+    public ResponseEntity<String> deleteDuration(@RequestBody Duration duration) {
+        durationService.deleteDuration(duration.getId());
         return ResponseEntity.ok("Ok");
     }
     @GetMapping("/durations")
