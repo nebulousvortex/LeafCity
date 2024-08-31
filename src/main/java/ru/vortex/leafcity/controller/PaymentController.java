@@ -3,10 +3,7 @@ package ru.vortex.leafcity.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vortex.leafcity.model.payment.Amount;
-import ru.vortex.leafcity.model.payment.Confirmation;
-import ru.vortex.leafcity.model.payment.Payment;
-import ru.vortex.leafcity.model.payment.PaymentMeta;
+import ru.vortex.leafcity.model.payment.*;
 import ru.vortex.leafcity.model.request.UserProductRequest;
 import ru.vortex.leafcity.model.shop.Product;
 import ru.vortex.leafcity.service.PaymentService;
@@ -31,7 +28,11 @@ public class PaymentController {
         Payment newPay = new Payment();
         Product product = shopService.getProductById(userProductRequest.getProductId());
         if(product != null) {
-            newPay.setAmount(new Amount(Float.toString(product.getRealPrice()), "RUB"));
+            Amount amount = new Amount(Float.toString(product.getRealPrice()), "RUB");
+            ArrayList<Item> items = new ArrayList<Item>();
+            items.add(new Item(product.getName(), amount, 2, 1, "another"));
+            newPay.setReceipt(new Receipt(items));
+            newPay.setAmount(amount);
             newPay.setDescription(product.getName());
             newPay.setCapture(true);
             newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));

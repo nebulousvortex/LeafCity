@@ -21,8 +21,10 @@ public class Payment {
     private Recipient recipient;
     @Embedded
     private Amount amount;
+    @Embedded
+    private Receipt receipt;
 
-    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount) {
+    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -35,9 +37,18 @@ public class Payment {
         this.metadata = metadata;
         this.recipient = recipient;
         this.amount = amount;
+        this.receipt = receipt;
     }
 
     public Payment() {
+    }
+
+    public Receipt getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
     }
 
     public Confirmation getConfirmation() {
