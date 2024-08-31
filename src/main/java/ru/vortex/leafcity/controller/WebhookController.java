@@ -32,9 +32,9 @@ public class WebhookController {
             Payment existingPayment = paymentService.getPayment(webhook.getObject().getId());
             existingPayment.setStatus(payment.getStatus());
             paymentService.savePayment(existingPayment);
-//            if(payment.getStatus().equals("succeeded")){
-//                rconService.sendCommand(payment.getMetadata().getUsername(), shopService.getProductById(payment.getMetadata().getProductId()));
-//            }
+            if(payment.getStatus().equals("succeeded")){
+                rconService.sendCommand(payment.getMetadata().getUsername(), shopService.getProductById(payment.getMetadata().getProductId()));
+            }
         }
         return ResponseEntity.ok("Ok");
     }
