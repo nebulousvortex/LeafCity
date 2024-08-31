@@ -31,7 +31,7 @@ public class PaymentController {
             Amount amount = new Amount(Float.toString(product.getRealPrice()), "RUB");
             ArrayList<Item> items = new ArrayList<Item>();
             items.add(new Item(product.getName(), amount, 2, 1, "another"));
-            newPay.setReceipt(new Receipt(items));
+            newPay.setReceipt(new Receipt(items, new Customer("vortexofnebula@mail.ru")));
             newPay.setAmount(amount);
             newPay.setDescription(product.getName());
             newPay.setCapture(true);

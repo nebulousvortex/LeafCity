@@ -11,11 +11,23 @@ public class Receipt {
     @ElementCollection
     List<Item> items;
 
+    @Embedded
+    Customer customer;
+
     public Receipt() {
     }
 
-    public Receipt(List<Item> items) {
+    public Receipt(List<Item> items, Customer customer) {
         this.items = items;
+        this.customer = customer;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public List<Item> getItems() {
