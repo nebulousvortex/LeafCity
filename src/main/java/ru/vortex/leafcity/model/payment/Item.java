@@ -11,16 +11,36 @@ public class Item{
     Integer vat_code;
     Number quantity;
     String measure;
+    String payment_subject;
+    String payment_mode;
 
-    public Item(String description, Amount amount, Integer vat_code, Number quantity, String measure) {
+    public Item(String description, Amount amount, Integer vat_code, Number quantity, String measure, String payment_subject, String payment_mode) {
         this.description = description;
         this.amount = amount;
         this.vat_code = vat_code;
         this.quantity = quantity;
         this.measure = measure;
+        this.payment_subject = payment_subject;
+        this.payment_mode = payment_mode;
     }
 
     public Item() {
+    }
+
+    public String getPayment_subject() {
+        return payment_subject;
+    }
+
+    public void setPayment_subject(String payment_subject) {
+        this.payment_subject = payment_subject;
+    }
+
+    public String getPayment_mode() {
+        return payment_mode;
+    }
+
+    public void setPayment_mode(String payment_mode) {
+        this.payment_mode = payment_mode;
     }
 
     public String getMeasure() {
