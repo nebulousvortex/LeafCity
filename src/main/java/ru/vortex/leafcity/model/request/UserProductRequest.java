@@ -2,16 +2,26 @@ package ru.vortex.leafcity.model.request;
 
 public class UserProductRequest {
     private String username;
+    private String email;
     private Long productId;
     private String redirectUrl;
 
-    public UserProductRequest(String username, Long productId, String redirectUrl) {
+    public UserProductRequest(String username, String email, Long productId, String redirectUrl) {
         this.username = username;
+        this.email = email;
         this.productId = productId;
         this.redirectUrl = redirectUrl;
     }
 
     public UserProductRequest() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
