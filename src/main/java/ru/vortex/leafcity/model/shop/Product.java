@@ -17,6 +17,7 @@ public class Product {
     private String command;
     private String notify;
     private int orderNum;
+    private String color;
     @Transient
     private float realPrice;
     @Column(columnDefinition = "TEXT")
@@ -39,6 +40,14 @@ public class Product {
     private void clearProduct(){
         this.category = null;
         this.duration = null;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public int getOrderNum() {

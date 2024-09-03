@@ -34,6 +34,12 @@ public class ShopService {
         if(product.getName() != null){
             existingProduct.setName(product.getName());
         }
+        if(product.getColor() != null){
+            existingProduct.setColor(product.getColor());
+        }
+        if(product.getOrderNum() > 0 ){
+            existingProduct.setOrderNum(product.getOrderNum());
+        }
         if(product.getFeatures() != null){
             existingProduct.setFeatures(product.getFeatures());
         }
