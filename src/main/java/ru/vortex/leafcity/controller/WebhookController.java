@@ -40,20 +40,23 @@ public class WebhookController {
         if(webhook.getObject() != null){
             Payment payment =  webhook.getObject();
             Payment existingPayment = paymentService.getPayment(webhook.getObject().getId());
-            existingPayment.setStatus(payment.getStatus());
-            paymentService.savePayment(existingPayment);
-            if(payment.getStatus().equals("succeeded")){
-                var product = shopService.getProductById(payment.getMetadata().getProductId());
-                var username = payment.getMetadata().getUsername();
-                RestTemplate restTemplate = new RestTemplate();
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentType(MediaType.APPLICATION_JSON);
+            if(existingPayment.getStatus().equals("pending")) {
+                existingPayment.setStatus(payment.getStatus());
+                paymentService.savePayment(existingPayment);
 
-                ProductGiftRequest request = new ProductGiftRequest(username, product);
-                HttpEntity<ProductGiftRequest> requestEntity = new HttpEntity<>(request, headers);
+                if (payment.getStatus().equals("succeeded")) {
+                    var product = shopService.getProductById(payment.getMetadata().getProductId());
+                    var username = payment.getMetadata().getUsername();
+                    RestTemplate restTemplate = new RestTemplate();
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
 
-                restTemplate.postForObject(dicsordUrl, requestEntity, String.class);
-                rconService.sendCommand(username, product);
+                    ProductGiftRequest request = new ProductGiftRequest(username, product);
+                    HttpEntity<ProductGiftRequest> requestEntity = new HttpEntity<>(request, headers);
+
+                    restTemplate.postForObject(dicsordUrl, requestEntity, String.class);
+                    rconService.sendCommand(username, product);
+                }
             }
         }
         return ResponseEntity.ok("Ok");
