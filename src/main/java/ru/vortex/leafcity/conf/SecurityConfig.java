@@ -48,9 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
                 .antMatchers("/shop/category").hasRole("USER")
 
+                .antMatchers("/shop/promocodes").hasRole("USER")
+
                 .antMatchers("/shop/durations").permitAll()
 
                 .antMatchers("/shop/categories").permitAll()
+
 
                 .antMatchers("/images/**").permitAll()
 
