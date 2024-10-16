@@ -15,11 +15,11 @@ public class UserProductRequest {
         this.promoCode = promoCode;
     }
 
-    public String getPromoCode() {
+    public String getPromocode() {
         return promoCode;
     }
 
-    public void setPromoCode(String promoCode) {
+    public void setPromocode(String promoCode) {
         this.promoCode = promoCode;
     }
 

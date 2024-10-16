@@ -31,9 +31,10 @@ public class PaymentController {
     public ResponseEntity<?> createPaymentRedirect(@RequestBody UserProductRequest userProductRequest) {
         Payment newPay = new Payment();
         Product product = shopService.getProductById(userProductRequest.getProductId());
-        float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromoCode());
+        float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
         if(product != null) {
-            Amount amount = new Amount(Float.toString(product.getRealPrice()), "RUB");
+            Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode)), "RUB");
+            System.out.println("!!!!!!!!!! A M O U N T !!!!!!! : " + amount);
             ArrayList<Item> items = new ArrayList<Item>();
             items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity","full_payment" ));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
