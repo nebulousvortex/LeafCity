@@ -15,7 +15,7 @@ import java.text.ParseException;
 import java.util.*;
 
 @RestController()
-@CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "https://leafcity.ru"})
+@CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "https://leafcity.ru", "http://91.233.43.231"})
 @RequestMapping("/payment")
 public class PaymentController {
     @Autowired
@@ -34,7 +34,6 @@ public class PaymentController {
         float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
         if(product != null) {
             Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode)), "RUB");
-            System.out.println("!!!!!!!!!! A M O U N T !!!!!!! : " + amount);
             ArrayList<Item> items = new ArrayList<Item>();
             items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity","full_payment" ));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
