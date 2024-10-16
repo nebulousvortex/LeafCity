@@ -24,6 +24,7 @@ public class ShopController {
     private DurationService durationService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
     private PromocodeService promocodeService;
 
     @GetMapping("/products")

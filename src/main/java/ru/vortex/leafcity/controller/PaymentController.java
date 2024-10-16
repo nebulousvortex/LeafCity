@@ -33,7 +33,7 @@ public class PaymentController {
         Product product = shopService.getProductById(userProductRequest.getProductId());
         float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromoCode());
         if(product != null) {
-            Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode)), "RUB");
+            Amount amount = new Amount(Float.toString(product.getRealPrice()), "RUB");
             ArrayList<Item> items = new ArrayList<Item>();
             items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity","full_payment" ));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));

@@ -3,9 +3,9 @@ package ru.vortex.leafcity.model.request;
 public class UserProductRequest {
     private String username;
     private String email;
+    private String promoCode;
     private Long productId;
     private String redirectUrl;
-    private String promoCode;
 
     public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode) {
         this.username = username;

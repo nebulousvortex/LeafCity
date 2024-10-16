@@ -61,7 +61,7 @@ public class JwtFilter extends GenericFilterBean {
         } catch (ExpiredJwtException e) {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-            httpResponse.getWriter().write("Срок действия JWT токена истек");
+            httpResponse.getWriter().write("The JWT token has expired");
             return;
         }
         fc.doFilter(request, response);
