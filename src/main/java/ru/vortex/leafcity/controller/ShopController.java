@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.vortex.leafcity.model.shop.Category;
 import ru.vortex.leafcity.model.shop.Duration;
 import ru.vortex.leafcity.model.shop.Product;
+import ru.vortex.leafcity.model.shop.Promocode;
 import ru.vortex.leafcity.service.CategoryService;
 import ru.vortex.leafcity.service.DurationService;
+import ru.vortex.leafcity.service.PromocodeService;
 import ru.vortex.leafcity.service.ShopService;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public class ShopController {
     private DurationService durationService;
     @Autowired
     private CategoryService categoryService;
+    private PromocodeService promocodeService;
 
     @GetMapping("/products")
     @ResponseBody
@@ -88,5 +91,11 @@ public class ShopController {
     @ResponseBody
     public List<Category> getCategories() {
         return categoryService.findAll();
+    }
+    @PostMapping("/promocode")
+    @ResponseBody
+    public ResponseEntity<String> createPromocode(@RequestBody Promocode promocode) {
+        promocodeService.createPromocode(promocode);
+        return ResponseEntity.ok("Ok");
     }
 }
