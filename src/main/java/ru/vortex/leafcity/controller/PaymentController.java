@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.vortex.leafcity.model.payment.*;
 import ru.vortex.leafcity.model.request.UserProductRequest;
 import ru.vortex.leafcity.model.shop.Product;
+import ru.vortex.leafcity.model.shop.Promocode;
 import ru.vortex.leafcity.service.PaymentService;
+import ru.vortex.leafcity.service.PromocodeService;
 import ru.vortex.leafcity.service.ShopService;
 
 import java.text.ParseException;
@@ -20,6 +22,8 @@ public class PaymentController {
     private PaymentService paymentService;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private PromocodeService promocodeService;
 
 
     @PostMapping("/getRedirectPayment")
@@ -27,8 +31,9 @@ public class PaymentController {
     public ResponseEntity<?> createPaymentRedirect(@RequestBody UserProductRequest userProductRequest) {
         Payment newPay = new Payment();
         Product product = shopService.getProductById(userProductRequest.getProductId());
+        float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromoCode());
         if(product != null) {
-            Amount amount = new Amount(Float.toString(product.getRealPrice()), "RUB");
+            Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode)), "RUB");
             ArrayList<Item> items = new ArrayList<Item>();
             items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity","full_payment" ));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));

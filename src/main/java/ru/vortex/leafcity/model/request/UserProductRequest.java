@@ -5,12 +5,22 @@ public class UserProductRequest {
     private String email;
     private Long productId;
     private String redirectUrl;
+    private String promoCode;
 
-    public UserProductRequest(String username, String email, Long productId, String redirectUrl) {
+    public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode) {
         this.username = username;
         this.email = email;
         this.productId = productId;
         this.redirectUrl = redirectUrl;
+        this.promoCode = promoCode;
+    }
+
+    public String getPromoCode() {
+        return promoCode;
+    }
+
+    public void setPromoCode(String promoCode) {
+        this.promoCode = promoCode;
     }
 
     public UserProductRequest() {
