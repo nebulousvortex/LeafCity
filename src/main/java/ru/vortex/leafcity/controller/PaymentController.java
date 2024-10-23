@@ -32,10 +32,11 @@ public class PaymentController {
         Payment newPay = new Payment();
         Product product = shopService.getProductById(userProductRequest.getProductId());
         float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
+        int quantity = userProductRequest.getQuantity();
         if(product != null) {
             Long shortId = paymentService.getNextShortId();
             newPay.setShortId(shortId);
-            Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode)), "RUB");
+            Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode) * quantity), "RUB");
             ArrayList<Item> items = new ArrayList<Item>();
             items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity","full_payment" ));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
