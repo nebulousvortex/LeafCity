@@ -46,7 +46,7 @@ public class Product {
     public Boolean getcanApplyPromoCode() {
         return canApplyPromoCode;
     }
-    public void setcanApplyPromoCode(Boolean aBoolean) {
+    public void setcanApplyPromoCode(Boolean canApplyPromoCode) {
         this.canApplyPromoCode = canApplyPromoCode;
     }
     public Boolean getCanEnterQuantity() {
@@ -58,7 +58,6 @@ public class Product {
     public String getColor() {
         return color;
     }
-
 
     public void setColor(String color) {
         this.color = color;
