@@ -51,6 +51,7 @@ public class PaymentService {
         HttpEntity<Payment> request = new HttpEntity<>(payment, headers);
         Payment newPayment = restTemplate.postForObject("https://api.yookassa.ru/v3/payments", request, Payment.class);
         if(newPayment != null) {
+            payment.setShortId(payment.getShortId());
             paymentRepository.save(newPayment);
         }
         return newPayment;
