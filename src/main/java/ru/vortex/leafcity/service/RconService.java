@@ -32,7 +32,7 @@ public class RconService {
                 String command = product.getCommand().replace("{username}", username) + duration;
                 rcon.command(command);
             }
-            sendNotify(username, product.getNotify().replace("{amount}", String.valueOf(product.getRealPrice())));
+            sendNotify(username, product.getNotify().replace("{amount}", String.valueOf(Math.floor(product.getRealPrice()))));
         }
     }
 
