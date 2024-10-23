@@ -11,6 +11,8 @@ import ru.vortex.leafcity.utils.ex.AuthenticationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SimpleTimeZone;
+
 @Service
 public class RconService {
 
@@ -32,7 +34,8 @@ public class RconService {
                 String command = product.getCommand().replace("{username}", username) + duration;
                 rcon.command(command);
             }
-            sendNotify(username, product.getNotify().replace("{amount}", String.valueOf(Math.floor(product.getRealPrice()))));
+            String notifyMessage = product.getNotify().replace("{amount}", String.valueOf((int)Math.floor(product.getRealPrice())));
+            sendNotify(username, notifyMessage);
         }
     }
 
