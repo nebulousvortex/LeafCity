@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Payment {
     @Id
     private String id;
+    private Long shortId;
     private String status;
     private String description;
     private String created_at;
@@ -73,6 +74,14 @@ public class Payment {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Long getShortId() {
+        return shortId;
+    }
+
+    public void setShortId(Long shortId) {
+        this.shortId = shortId;
     }
 
     public String getStatus() {

@@ -118,4 +118,9 @@ public class PaymentService {
         }
         return buffer.toString();
     }
+
+    public Long getNextShortId() {
+        Long maxShortId = paymentRepository.findMaxShortId();
+        return (maxShortId == null) ? 1 : maxShortId + 1;
+    }
 }
