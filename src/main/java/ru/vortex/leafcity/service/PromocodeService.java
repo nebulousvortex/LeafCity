@@ -2,7 +2,6 @@ package ru.vortex.leafcity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.vortex.leafcity.model.shop.Category;
 import ru.vortex.leafcity.model.shop.Promocode;
 import ru.vortex.leafcity.repository.PromocodeRepository;
 
