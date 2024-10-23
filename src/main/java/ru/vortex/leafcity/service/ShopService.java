@@ -70,6 +70,12 @@ public class ShopService {
         if(product.getImageUrl() != null){
             existingProduct.setImageUrl(product.getImageUrl());
         }
+        if(product.getcanApplyPromoCode() != null) {
+            existingProduct.setcanApplyPromoCode(product.getcanApplyPromoCode());
+        }
+        if(product.getCanEnterQuantity() != null) {
+            existingProduct.setCanEnterQuantity(product.getCanEnterQuantity());
+        }
         productRepository.save(existingProduct);
     }
 

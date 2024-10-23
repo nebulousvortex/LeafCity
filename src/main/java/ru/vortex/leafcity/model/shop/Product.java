@@ -18,6 +18,8 @@ public class Product {
     private String notify;
     private int orderNum;
     private String color;
+    private Boolean canApplyPromoCode;
+    private Boolean canEnterQuantity;
     @Transient
     private float realPrice;
     @Column(columnDefinition = "TEXT")
@@ -41,10 +43,22 @@ public class Product {
         this.category = null;
         this.duration = null;
     }
-
+    public Boolean getcanApplyPromoCode() {
+        return canApplyPromoCode;
+    }
+    public void setcanApplyPromoCode(Boolean aBoolean) {
+        this.canApplyPromoCode = canApplyPromoCode;
+    }
+    public Boolean getCanEnterQuantity() {
+        return canEnterQuantity;
+    }
+    public void setCanEnterQuantity(Boolean canEnterQuantity) {
+        this.canEnterQuantity = this.canEnterQuantity;
+    }
     public String getColor() {
         return color;
     }
+
 
     public void setColor(String color) {
         this.color = color;
