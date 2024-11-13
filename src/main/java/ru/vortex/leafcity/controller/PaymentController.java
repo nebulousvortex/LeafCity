@@ -31,42 +31,27 @@ public class PaymentController {
     public ResponseEntity<?> createPaymentRedirect(@RequestBody UserProductRequest userProductRequest) {
         Payment newPay = new Payment();
         Product product = shopService.getProductById(userProductRequest.getProductId());
-        // Получаем скидку по промокоду
-        float promocodeDiscount = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
+        float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
         int count = userProductRequest.getCount();
-
-        if (product != null) {
-            // Расчёт итоговой цены с учётом промокода и количества
-            float productPrice = product.getRealPrice(); // Цена с учётом скидки товара
-            float discountedPrice = productPrice * (1 - promocodeDiscount); // Применение промокода
-            float totalAmount = discountedPrice * count; // Итоговая сумма с учётом количества товара
-
-            // Создание платежа
+        if(product != null) {
             Long shortId = paymentService.getNextShortId();
             newPay.setShortId(shortId);
-
-            // Подготовка суммы платежа
-            Amount amount = new Amount(Float.toString(totalAmount), "RUB");
-            ArrayList<Item> items = new ArrayList<>();
-            items.add(new Item(product.getName(), amount, count, 1, "another", "commodity", "full_payment"));
-
-            // Устанавливаем параметры платежа
+            Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode) * count), "RUB");
+            ArrayList<Item> items = new ArrayList<Item>();
+            items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity","full_payment" ));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
             newPay.setAmount(amount);
             newPay.setDescription("Платеж #" + shortId + " в магазине leafcity.ru/shop за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
             newPay.setCapture(true);
             newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));
             newPay.setConfirmation(new Confirmation("redirect", "", userProductRequest.getRedirectUrl()));
-
-            // Сохранение платежа
             newPay = paymentService.createPayment(newPay);
 
-            // Ответ с URL для подтверждения
             Map<String, String> response = new HashMap<>();
             response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
             return ResponseEntity.ok(response);
         }
-        return ResponseEntity.badRequest().body("Продукт не найден!");
+        return  ResponseEntity.badRequest().body("продукт не найден!");
     }
     @GetMapping("/getPayments")
     @ResponseBody
