@@ -19,7 +19,11 @@ public class PromocodeService {
 
     public float getDiscountByCode(String code) {
         Promocode promoCode = promoCodeRepository.findByCode(code);
-        return promoCode != null ? promoCode.getDiscount() : 0.0f; // Если промокод не найден, вернуть 0
+        if (promoCode != null) {
+            return promoCode.getDiscount();
+        }
+        return 0.0f; // Если промокод не найден, возвращаем 0 (без скидки)
     }
+
 }
 
