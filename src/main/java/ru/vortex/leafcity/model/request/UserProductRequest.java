@@ -6,7 +6,7 @@ public class UserProductRequest {
     private String promoCode;
     private Long productId;
     private String redirectUrl;
-    private int count = 1;
+    private int count;
 
     // Конструктор
     public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode, int count) {
@@ -28,6 +28,9 @@ public class UserProductRequest {
     }
 
     public int getCount() {
+        if (count == 0) {
+            return 1;
+        }
         return count;
     }
 
