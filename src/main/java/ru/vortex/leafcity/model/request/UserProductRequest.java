@@ -8,7 +8,7 @@ public class UserProductRequest {
     private String redirectUrl;
     private int count = 1;
 
-    public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode) {
+    public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode, int count) {
         this.username = username;
         this.email = email;
         this.productId = productId;
