@@ -42,7 +42,7 @@ public class PaymentController {
 
             // Применяем скидку
             Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocodeDiscount) * userProductRequest.getCount()), "RUB");
-            System.out.println("Вот что передает amount: " + amount);
+            System.out.println("Вот что передает amount: " + amount.getValue());
             ArrayList<Item> items = new ArrayList<>();
             items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity", "full_payment"));
 
