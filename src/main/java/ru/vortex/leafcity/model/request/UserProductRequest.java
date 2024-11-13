@@ -8,6 +8,7 @@ public class UserProductRequest {
     private String redirectUrl;
     private int count = 1;
 
+    // Конструктор
     public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode, int count) {
         this.username = username;
         this.email = email;
@@ -17,23 +18,21 @@ public class UserProductRequest {
         this.count = count;
     }
 
-    public String getPromocode() {
+    // Геттеры и сеттеры
+    public String getPromoCode() {
         return promoCode;
+    }
+
+    public void setPromoCode(String promoCode) {
+        this.promoCode = promoCode;
     }
 
     public int getCount() {
         return count;
     }
 
-    public void setCount(int quantity) {
-        this.count = quantity;
-    }
-
-    public void setPromocode(String promoCode) {
-        this.promoCode = promoCode;
-    }
-
-    public UserProductRequest() {
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getEmail() {
