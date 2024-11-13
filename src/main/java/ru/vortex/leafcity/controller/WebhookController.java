@@ -47,6 +47,7 @@ public class WebhookController {
                 if (payment.getStatus().equals("succeeded")) {
                     var product = shopService.getProductById(payment.getMetadata().getProductId());
                     product.setRealPrice(Float.parseFloat(webhook.getObject().getAmount().getValue()));
+                    System.out.println(product.getRealPrice() + "   " + webhook.getObject().getAmount().getValue());
                     var username = payment.getMetadata().getUsername();
                     RestTemplate restTemplate = new RestTemplate();
                     HttpHeaders headers = new HttpHeaders();
