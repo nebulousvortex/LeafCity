@@ -168,9 +168,6 @@ public class Product {
     }
 
     public float getRealPrice() {
-        if (realPrice != 0) {
-            return realPrice;
-        }
         return this.price - ( this.price * this.sale / 100 );
     }
 
