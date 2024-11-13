@@ -11,6 +11,8 @@ import ru.vortex.leafcity.service.PaymentService;
 import ru.vortex.leafcity.service.PromocodeService;
 import ru.vortex.leafcity.service.ShopService;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.*;
 
@@ -32,38 +34,43 @@ public class PaymentController {
         Payment newPay = new Payment();
         Product product = shopService.getProductById(userProductRequest.getProductId());
 
-        // Получаем скидку по промокоду
-        float promocodeDiscount = promocodeService.getDiscountByCode(userProductRequest.getPromoCode());
-        System.out.println("Результат промокода с request" + userProductRequest.getPromoCode());
-
-        // Если продукт найден
-        if (product != null) {
-            Long shortId = paymentService.getNextShortId();
-            newPay.setShortId(shortId);
-
-            // Применяем скидку
-            Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocodeDiscount) * userProductRequest.getCount()), "RUB");
-
-            ArrayList<Item> items = new ArrayList<>();
-            items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity", "full_payment"));
-
-            newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
-            newPay.setAmount(amount);
-            newPay.setDescription("Платеж #" + shortId + " в магазине leafcity.ru/shop за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
-            newPay.setCapture(true);
-            newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));
-            newPay.setConfirmation(new Confirmation("redirect", "", userProductRequest.getRedirectUrl()));
-
-            newPay = paymentService.createPayment(newPay);
-
-            Map<String, String> response = new HashMap<>();
-            response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
-            return ResponseEntity.ok(response);
+        if (product == null) {
+            return ResponseEntity.badRequest().body("Продукт не найден!");
         }
 
-        // Если продукт не найден
-        return ResponseEntity.badRequest().body("Продукт не найден!");
+        // Получаем скидку по промокоду
+        float promocodeDiscount = promocodeService.getDiscountByCode(userProductRequest.getPromoCode());
+        if (promocodeDiscount < 0) {
+            return ResponseEntity.badRequest().body("Некорректный промокод!");
+        }
+
+        Long shortId = paymentService.getNextShortId();
+        newPay.setShortId(shortId);
+
+        // Рассчитываем сумму с учетом скидки
+        BigDecimal realPrice = BigDecimal.valueOf(product.getRealPrice());
+        BigDecimal totalPrice = realPrice.multiply(BigDecimal.valueOf(1 - promocodeDiscount)).multiply(BigDecimal.valueOf(userProductRequest.getCount()));
+        Amount amount = new Amount(totalPrice.setScale(2, RoundingMode.HALF_UP).toString(), "RUB");
+
+        // Формируем чек и метаданные платежа
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity", "full_payment"));
+
+        newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
+        newPay.setAmount(amount);
+        newPay.setDescription("Платеж #" + shortId + " в магазине leafcity.ru/shop за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
+        newPay.setCapture(true);
+        newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));
+        newPay.setConfirmation(new Confirmation("redirect", "", userProductRequest.getRedirectUrl()));
+
+        // Создаем платеж
+        newPay = paymentService.createPayment(newPay);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
+        return ResponseEntity.ok(response);
     }
+
 
     @GetMapping("/getPayment")
     @ResponseBody
