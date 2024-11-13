@@ -33,13 +33,13 @@ public class PaymentController {
         Product product = shopService.getProductById(userProductRequest.getProductId());
         // Получаем скидку по промокоду
         float promocodeDiscount = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
-        int quantity = userProductRequest.getQuantity();
+        int count = userProductRequest.getCount();
 
         if (product != null) {
             // Расчёт итоговой цены с учётом промокода и количества
             float productPrice = product.getRealPrice(); // Цена с учётом скидки товара
             float discountedPrice = productPrice * (1 - promocodeDiscount); // Применение промокода
-            float totalAmount = discountedPrice * quantity; // Итоговая сумма с учётом количества товара
+            float totalAmount = discountedPrice * count; // Итоговая сумма с учётом количества товара
 
             // Создание платежа
             Long shortId = paymentService.getNextShortId();
@@ -48,7 +48,7 @@ public class PaymentController {
             // Подготовка суммы платежа
             Amount amount = new Amount(Float.toString(totalAmount), "RUB");
             ArrayList<Item> items = new ArrayList<>();
-            items.add(new Item(product.getName(), amount, quantity, 1, "another", "commodity", "full_payment"));
+            items.add(new Item(product.getName(), amount, count, 1, "another", "commodity", "full_payment"));
 
             // Устанавливаем параметры платежа
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));

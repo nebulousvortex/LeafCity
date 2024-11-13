@@ -6,7 +6,7 @@ public class UserProductRequest {
     private String promoCode;
     private Long productId;
     private String redirectUrl;
-    private int quantity = 1;
+    private int count = 1;
 
     public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode) {
         this.username = username;
@@ -14,19 +14,19 @@ public class UserProductRequest {
         this.productId = productId;
         this.redirectUrl = redirectUrl;
         this.promoCode = promoCode;
-        this.quantity = quantity;
+        this.count = count;
     }
 
     public String getPromocode() {
         return promoCode;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getCount() {
+        return count;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCount(int quantity) {
+        this.count = quantity;
     }
 
     public void setPromocode(String promoCode) {
