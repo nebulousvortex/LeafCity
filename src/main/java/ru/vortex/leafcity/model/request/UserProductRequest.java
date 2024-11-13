@@ -28,7 +28,7 @@ public class UserProductRequest {
     }
 
     public int getCount() {
-        if (count == 0) {
+        if (this.count == 0) {
             return 1;
         }
         return count;
