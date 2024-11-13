@@ -34,6 +34,7 @@ public class PaymentController {
 
         // Получаем скидку по промокоду
         float promocodeDiscount = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
+        System.out.println(userProductRequest.getPromocode());
 
         // Если продукт найден
         if (product != null) {
