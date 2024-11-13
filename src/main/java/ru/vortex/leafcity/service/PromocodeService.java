@@ -23,6 +23,7 @@ public class PromocodeService {
             System.out.println("Промокод найден: " + promoCode.getCode() + " со скидкой: " + promoCode.getDiscount());
             return promoCode.getDiscount();
         } else {
+            System.out.println(code);
             System.out.println("Промокод не найден");
             return 0.0f;  // Если промокод не найден, вернем 0
         }
